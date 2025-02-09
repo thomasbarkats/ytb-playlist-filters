@@ -100,17 +100,27 @@ class PlaylistPageEnhancer {
     // Observe new videos
     const observer = new MutationObserver((mutations) => {
       let hasNewVideos = false;
-
       for (const mutation of mutations) {
         if (this.containsNewVideos(mutation.addedNodes)) {
           hasNewVideos = true;
           break;
         }
       }
-
       if (hasNewVideos) {
-        this.processVideos(getAllElements(SELECTORS.VIDEO_ITEM));
-        this.applyFilters();
+        // Wait for duration elements to be available
+        const checkDurations = async () => {
+          const newVideos = getAllElements(SELECTORS.VIDEO_ITEM);
+          const allDurationsLoaded = Array.from(newVideos).every(
+            video => video.querySelector(SELECTORS.VIDEO_DURATION)
+          );
+          if (allDurationsLoaded) {
+            this.processVideos(newVideos);
+            this.applyFilters();
+          } else {
+            setTimeout(checkDurations, 100);
+          }
+        };
+        checkDurations();
       }
     });
 
@@ -126,6 +136,7 @@ class PlaylistPageEnhancer {
       if (node instanceof Element) {
         if (node.matches(SELECTORS.VIDEO_ITEM)) return true;
         if (node.querySelector(SELECTORS.VIDEO_ITEM)) return true;
+        if (node.matches(SELECTORS.PLAYLIST_CONTAINER)) return true;
       }
     }
     return false;
@@ -403,25 +414,24 @@ class PlaylistPageEnhancer {
   // Watch for URL changes to reinitialize on playlist navigation
   private watchNavigationChanges(): void {
     let lastUrl = window.location.href;
-  
+
     const observer = new MutationObserver(async () => {
       const currentUrl = window.location.href;
       if (currentUrl === lastUrl) return;
-  
+
       lastUrl = currentUrl;
       if (!currentUrl.includes('/playlist?')) return;
-  
+
       await waitForElement(SELECTORS.PLAYLIST_CONTAINER);
       this.channelFilters.clear();
       this.resetAllFilters();
-  
+
       const container = getElement(SELECTORS.PLAYLIST_CONTAINER);
       if (container) {
         this.processVideos(getAllElements(SELECTORS.VIDEO_ITEM));
       }
     });
-  
-    // Observer le body plutôt que juste le titre
+
     observer.observe(document.body, {
       subtree: true,
       childList: true
