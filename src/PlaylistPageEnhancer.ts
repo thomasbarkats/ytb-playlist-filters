@@ -1,6 +1,6 @@
 import { YOUTUBE_SELECTORS as SELECTORS, DURATION_THRESHOLDS } from './config/youtube-selectors';
 import { CurrentFilters, VideoStats, DurationThresholds } from './types/PlaylistPageEnhancer.types';
-import { debounce } from './utils/debounce';
+import { debounce, searchInText } from './utils/search.utils';
 import { getElement, getAllElements, waitForElement } from './utils/dom-helpers';
 
 const LOG_TITLE = 'YouTube WL & Playlist Filters';
@@ -449,18 +449,9 @@ class PlaylistPageEnhancer {
         const title = video.querySelector(SELECTORS.VIDEO_TITLE)?.textContent?.trim() || '';
         const duration = this.getVideoDuration(video);
 
-        // Channel filter
         if (this.currentFilters.channel && channel !== this.currentFilters.channel) return false;
-
-        // Channel search
-        if (this.currentFilters.channelSearch &&
-          !channel.toLowerCase().includes(this.currentFilters.channelSearch.toLowerCase())) return false;
-
-        // Title search
-        if (this.currentFilters.titleSearch &&
-          !title.toLowerCase().includes(this.currentFilters.titleSearch.toLowerCase())) return false;
-
-        // Duration filter
+        if (this.currentFilters.channelSearch && !searchInText(channel, this.currentFilters.channelSearch)) return false;
+        if (this.currentFilters.titleSearch && !searchInText(title, this.currentFilters.titleSearch)) return false;
         if (this.currentFilters.duration && !this.isInDurationRange(duration, this.currentFilters.duration)) return false;
 
         return true;
