@@ -10,7 +10,7 @@ export const YOUTUBE_SELECTORS = {
   THUMBNAIL: 'ytd-thumbnail',
 
   // Custom UI selectors
-  FILTER_CONTAINER: 'yt-wl-filter-container',
+  FILTER_CONTAINER: 'yt-wl-filters-container',
   FILTER_INPUTS: {
     CHANNEL: '#channelFilter',
     CHANNEL_SEARCH: '#channelSearch',

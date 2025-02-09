@@ -1,105 +1,107 @@
-<div class="filter-header">
-  <div class="filters-list">
-    <div class="filter-group">
+<div class="yt-wl-filters">
 
-      <!-- Actions & global info section -->
-      <div class="btns">
-        <!-- Reset button -->
-        <button id="resetAllFilters">Reset all filters</button>
-        <!-- Playlist creation button -->
-        <button id="playFilteredVideos" style="display: none">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          Play filtered videos
-        </button>
-        <!-- Statistics for current selection & related tooltip -->
-        <span class="filter-stats">
-          <span class="stats-text"></span>
-          <span class="stats-info-icon" style="display: none"
-            title="Note: For large playlists, only currently loaded videos are counted and will be included in any playlist operation.">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 16v-4" />
-              <path d="M12 8h.01" />
-            </svg>
-          </span>
-        </span>
-        <!-- Toggle to switch view mode -->
-        <div class="yt-toggle-wrapper">
-          <input type="checkbox" id="toggleCompactView" class="yt-toggle-input">
-          <label for="toggleCompactView" class="yt-toggle-button">
-            <div class="yt-toggle-states">
-              <span class="yt-toggle-state" style="width: 75px">Default</span>
-              <span class="yt-toggle-state" style="width: 90px">Compact</span>
-            </div>
-          </label>
+  <!-- Actions & global info section -->
+  <div class="yt-wl-filters-head">
+    <!-- Reset button -->
+    <button class="yt-wl-filters-btn" id="resetAllFilters">Reset all filters</button>
+    <!-- Playlist creation button -->
+    <button class="yt-wl-filters-btn" id="playFilteredVideos" style="display: none">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      Play filtered videos
+    </button>
+    <!-- Statistics for current selection & related tooltip -->
+    <span class="yt-wl-filters-stats">
+      <span class="stats-text"></span>
+      <span class="stats-info-icon" style="display: none"
+        title="Note: For large playlists, only currently loaded videos are counted and will be included in any playlist operation.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+      </span>
+    </span>
+    <!-- Toggle to switch view mode -->
+    <div class="yt-toggle-wrapper">
+      <input type="checkbox" id="toggleCompactView" class="yt-toggle-input">
+      <label for="toggleCompactView" class="yt-toggle-button">
+        <div class="yt-toggle-states">
+          <span class="yt-toggle-state" style="width: 75px">Default</span>
+          <span class="yt-toggle-state" style="width: 90px">Compact</span>
         </div>
-      </div>
-
-      <!-- Filters section -->
-      <!-- Channel selector -->
-      <div class="filter-row">
-        <span>Filter by Channel</span>
-        <div class="input-wrapper">
-          <select id="channelFilter">
-            <option value="">All Channels</option>
-          </select>
-          <button class="reset-filter" data-for="channelFilter" style="display: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- Channel search -->
-      <div class="filter-row">
-        <span>Search Channel</span>
-        <div class="input-wrapper">
-          <input type="text" id="channelSearch" placeholder="Search channel" />
-          <button class="reset-filter" data-for="channelSearch" style="display: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- Title search -->
-      <div class="filter-row">
-        <span>Search Title</span>
-        <div class="input-wrapper">
-          <input type="text" id="titleSearch" placeholder="Search by title" />
-          <button class="reset-filter" data-for="titleSearch" style="display: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- Duration selector -->
-      <div class="filter-row">
-        <span>Filter by Duration</span>
-        <div class="input-wrapper">
-          <select id="durationFilter">
-            <option value="">Any Duration</option>
-            <option value="0-10">Less than 10min</option>
-            <option value="10-20">10-20min</option>
-            <option value="20-30">20-30min</option>
-            <option value="30-45">30-45min</option>
-            <option value="45+">More than 45min</option>
-          </select>
-          <button class="reset-filter" data-for="durationFilter" style="display: none;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-
+      </label>
     </div>
+  </div>
+
+  <!-- Filters section -->
+  <div class="yt-wl-filters-rows">
+
+    <!-- Channel selector -->
+    <div class="filter-row">
+      <span>Filter by Channel</span>
+      <div class="input-wrapper">
+        <select id="channelFilter">
+          <option value="">All Channels</option>
+        </select>
+        <button class="reset-filter" data-for="channelFilter" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Channel search -->
+    <div class="filter-row">
+      <span>Search Channel</span>
+      <div class="input-wrapper">
+        <input type="text" id="channelSearch" placeholder="Search channel" />
+        <button class="reset-filter" data-for="channelSearch" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Title search -->
+    <div class="filter-row">
+      <span>Search Title</span>
+      <div class="input-wrapper">
+        <input type="text" id="titleSearch" placeholder="Search by title" />
+        <button class="reset-filter" data-for="titleSearch" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Duration selector -->
+    <div class="filter-row">
+      <span>Filter by Duration</span>
+      <div class="input-wrapper">
+        <select id="durationFilter">
+          <option value="">Any Duration</option>
+          <option value="0-10">Less than 10min</option>
+          <option value="10-20">10-20min</option>
+          <option value="20-30">20-30min</option>
+          <option value="30-45">30-45min</option>
+          <option value="45+">More than 45min</option>
+        </select>
+        <button class="reset-filter" data-for="durationFilter" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
   </div>
 </div>

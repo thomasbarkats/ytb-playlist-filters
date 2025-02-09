@@ -6,25 +6,28 @@
   --theme-primary-hover: var(--yt-spec-call-to-action-inverse);
   --theme-badge: var(--yt-spec-badge-chip-background);
   --theme-raised: var(--yt-spec-raised-background);
-  
+
   /* Text colors */
   --text-primary: var(--yt-spec-text-primary);
   --text-secondary: var(--yt-spec-text-secondary);
 }
 
-.yt-wl-filter-container {
+
+/* Containers */
+
+.yt-wl-filters-container {
   background: var(--theme-background);
   padding-left: 36px;
   padding-right: 12px;
   margin-top: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 36px;
   border-radius: 0;
   position: sticky;
   top: 0;
   z-index: 2001;
 }
 
-.btns {
+.yt-wl-filters-head {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -32,14 +35,27 @@
   gap: 16px;
 }
 
-#resetAllFilters {
-  padding: 10px 16px;
+.yt-wl-filters-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* Header actions and info */
+
+.yt-wl-filters-btn {
+  padding: 9px 16px;
   border: none;
   border-radius: 18px;
-  background: var(--theme-surface);
-  color: var(--text-primary);
   font-size: 14px;
   cursor: pointer;
+  background: var(--theme-surface);
+  color: var(--text-primary);
+  transition: background-color 0.2s;
+}
+
+#resetAllFilters {
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -56,14 +72,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 18px;
   background: var(--theme-primary);
   color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 #playFilteredVideos:hover {
@@ -75,7 +85,7 @@
   height: 16px;
 }
 
-.filter-stats {
+.yt-wl-filters-stats {
   color: var(--text-secondary);
   font-size: 14px;
   min-width: 150px;
@@ -94,6 +104,9 @@
 .stats-info-icon:hover {
   color: var(--text-primary);
 }
+
+
+/* Toggle switch view mode */
 
 .yt-toggle-wrapper {
   display: inline-block;
@@ -145,17 +158,20 @@
   z-index: 1;
 }
 
-.yt-toggle-input:not(:checked) ~ .yt-toggle-button .yt-toggle-state:first-child,
-.yt-toggle-input:checked ~ .yt-toggle-button .yt-toggle-state:last-child {
+.yt-toggle-input:not(:checked)~.yt-toggle-button .yt-toggle-state:first-child,
+.yt-toggle-input:checked~.yt-toggle-button .yt-toggle-state:last-child {
   color: var(--text-primary);
   position: relative;
   z-index: 2;
 }
 
-.yt-toggle-input:checked ~ .yt-toggle-button::after {
+.yt-toggle-input:checked~.yt-toggle-button::after {
   transform: translateX(74px);
   width: 87px;
 }
+
+
+/* Compact style for videos */
 
 ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer ytd-thumbnail {
   height: 54px !important;
@@ -166,17 +182,13 @@ ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer {
   height: auto !important;
 }
 
-.filters-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+
+/* Filter rows with inputs and actions */
 
 .filter-row {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 12px;
 }
 
 .filter-row span {
@@ -253,6 +265,8 @@ input:focus {
   color: var(--text-primary);
 }
 
+
+/* Hide Youtube alert banner for non-available videos */
 #alerts {
   display: none !important;
 }
