@@ -4,21 +4,13 @@
   "version": "1.0",
   "author": "Thomas BARKATS",
   "description": "Improves the interface of Youtube Playlist pages on desktop with filters and more. Useful for 'Watch later' page",
-  "permissions": [
-    "activeTab",
-    "scripting",
-    "storage"
-  ],
   "host_permissions": [
     "https://www.youtube.com/*"
   ],
   "content_scripts": [{
-    "matches": ["*://*.youtube.com/playlist?list=*"],
+    "matches": ["*://*.youtube.com/*"],
     "js": ["dist/main.bundle.js"]
   }],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://storage.googleapis.com"
-  },
   "web_accessible_resources": [{
     "resources": [
       "src/templates/*",

@@ -1,6 +1,6 @@
-# <img src="icons/icon48.png" alt="YouTube WL & Playlist Filters icon" width="24"> YouTube WL & Playlist Filters
+# <img src="icons/icon48.png" alt="YouTube WL & Playlist Filters icon" width="32"> YouTube WL & Playlist Filters
 
-A Chrome extension to enhance YouTube Watch Later and Playlist experience with filtering capabilities.
+A Chrome extension to enhance the interface of Youtube Playlist pages on desktop with filtering capabilities.
 
 ## Features
 
@@ -8,6 +8,7 @@ A Chrome extension to enhance YouTube Watch Later and Playlist experience with f
 - Search through video titles
 - Filter by video duration
 - Create custom playlists from filtered videos
+- Style adapted to Youtube interface (and adapts to light/dark mode)
 
 ## Installation
 

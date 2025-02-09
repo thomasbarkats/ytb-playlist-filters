@@ -403,27 +403,27 @@ class PlaylistPageEnhancer {
   // Watch for URL changes to reinitialize on playlist navigation
   private watchNavigationChanges(): void {
     let lastUrl = window.location.href;
-
+  
     const observer = new MutationObserver(async () => {
       const currentUrl = window.location.href;
       if (currentUrl === lastUrl) return;
-
+  
       lastUrl = currentUrl;
       if (!currentUrl.includes('/playlist?')) return;
-
+  
       await waitForElement(SELECTORS.PLAYLIST_CONTAINER);
       this.channelFilters.clear();
       this.resetAllFilters();
-
+  
       const container = getElement(SELECTORS.PLAYLIST_CONTAINER);
       if (container) {
         this.processVideos(getAllElements(SELECTORS.VIDEO_ITEM));
       }
     });
-
-    observer.observe(document.querySelector('title') as Element, {
+  
+    // Observer le body plutôt que juste le titre
+    observer.observe(document.body, {
       subtree: true,
-      characterData: true,
       childList: true
     });
   }
