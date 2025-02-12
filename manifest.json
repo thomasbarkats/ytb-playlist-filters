@@ -1,15 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "YouTube WL & Playlist Filters",
-  "version": "1.0",
+  "name": "YouTube Playlist Filters",
+  "version": "1.0.0",
   "author": "Thomas BARKATS",
-  "description": "Improves the interface of Youtube Playlist pages on desktop with filters and more. Useful for 'Watch later' page",
+  "description": "Enhance your YouTube playlist experience with powerful filtering tools. Perfect for managing Watch Later and other playlists with advanced search and filtering capabilities.",
+  "homepage_url": "https://github.com/thomasbarkats/ytb-playlist-filters",
+  "permissions": [],
   "host_permissions": [
     "https://www.youtube.com/*"
   ],
   "content_scripts": [{
     "matches": ["*://*.youtube.com/*"],
-    "js": ["dist/main.bundle.js"]
+    "js": ["dist/main.bundle.js"],
+    "run_at": "document_end"
   }],
   "web_accessible_resources": [{
     "resources": [
@@ -23,11 +26,14 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
-    }
+    },
+    "default_title": "YouTube Playlist Filters"
   },
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "minimum_chrome_version": "88",
+  "offline_enabled": true
 }

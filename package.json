@@ -1,7 +1,8 @@
 {
-  "name": "youtube-wl-playlist-filters",
+  "name": "ytb-playlist-filters",
   "version": "1.0.0",
-  "description": "",
+  "description": "Enhanced filtering and search capabilities for YouTube playlist pages.",
+  "private": true,
   "main": "src/main.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
@@ -9,7 +10,22 @@
     "publish": "npm run build && bestzip extension.zip manifest.json icons/* src/styles/* dist/*"
   },
   "author": "Thomas BARKATS",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomasbarkats/ytb-playlist-filters"
+  },
+  "keywords": [
+    "youtube",
+    "playlist",
+    "filter",
+    "search",
+    "chrome-extension",
+    "youtube-playlist"
+  ],
+  "bugs": {
+    "url": "https://github.com/thomasbarkats/ytb-playlist-filters/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/preset-env": "^7.24.0",

@@ -1,14 +1,27 @@
-# <img src="icons/icon48.png" alt="YouTube WL & Playlist Filters icon" width="32"> YouTube WL & Playlist Filters
+# YouTube Playlist Filters - Chrome Extension
 
-A Chrome extension to enhance the interface of Youtube Playlist pages on desktop with filtering capabilities.
+A Chrome extension that enhances YouTube playlist pages with powerful filtering capabilities. Perfect for managing large playlists and Watch Later content.
 
-## Features
+## ✨ Features
 
-- Filter videos by channel
-- Search through video titles
-- Filter by video duration
-- Create custom playlists from filtered videos
-- Style adapted to Youtube interface (and adapts to light/dark mode)
+- **Channel Filtering**: Easily filter videos by channel name
+- **Smart Search**: Search through video titles with instant results
+- **Duration Filter**: Find videos based on their length (short/medium/long)
+- **Playlist Management**: Create custom playlists from filtered videos
+- **Native Look & Feel**: Seamlessly integrates with YouTube's interface
+- **Theme Support**: Automatically adapts to YouTube's light/dark mode
+- **Performance**: Minimal impact on page load time
+- **Privacy-Focused**: Works entirely client-side with no data collection
+
+## 🪄 Usage
+
+After installation:
+1. Navigate to any YouTube playlist or Watch Later page
+2. Look for the new filter controls above the video list
+3. Filter by channel using the dropdown menu
+4. Use duration filters to find videos of specific lengths
+5. Search by title or channel to find specific videos
+6. Select videos and create new playlists with filtered content
 
 ## Installation
 
@@ -28,8 +41,8 @@ This project uses TypeScript, Webpack, and the Chrome Extension API.
 
 1. Clone the repository
 ```bash
-git clone https://github.com/thomasbarkats/youtube-wl-playlist-filters.git
-cd youtube-wl-playlist-filters
+git clone https://github.com/thomasbarkats/ytb-playlist-filters.git
+cd ytb-playlist-filters
 ```
 
 2. Install dependencies
@@ -49,9 +62,13 @@ npm run build
 
 5. Start development with hot-reload
 ```bash
-npm run dev
+npm run watch
 ```
 
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
