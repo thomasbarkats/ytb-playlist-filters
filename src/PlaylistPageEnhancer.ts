@@ -60,7 +60,7 @@ class PlaylistPageEnhancer {
 
   private async injectStyles(): Promise<void> {
     try {
-      const response = await fetch(chrome.runtime.getURL('src/styles/styles.css'));
+      const response = await fetch(chrome.runtime.getURL('styles/styles.css'));
       const css = await response.text();
       const style = document.createElement('style');
       style.textContent = css;
@@ -72,7 +72,7 @@ class PlaylistPageEnhancer {
 
   private async createFilterUI(): Promise<void> {
     try {
-      const response = await fetch(chrome.runtime.getURL('src/templates/filterContainer.html'));
+      const response = await fetch(chrome.runtime.getURL('templates/filterContainer.html'));
       const html = await response.text();
 
       const filterContainer = document.createElement('div');

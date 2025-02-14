@@ -1,11 +1,13 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   entry: './src/PlaylistPageEnhancer.ts',
   output: {
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'package'),
+    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -20,5 +22,15 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "src/templates", to: "templates" },
+        { from: "src/styles", to: "styles" },
+        { from: "icons", to: "icons" },
+        { from: "manifest.json", to: "manifest.json" },
+      ],
+    }),
+  ],
 };

@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
+    "outDir": "./package",
     "rootDir": "./src",
     "moduleResolution": "node",
     "baseUrl": "."

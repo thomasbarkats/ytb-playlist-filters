@@ -1,5 +1,10 @@
 # YouTube Playlist Filters - Chrome Extension
 
+[![Version](https://img.shields.io/chrome-web-store/v/idecjbacpbnbijnbekemooobjpffogab?label=Version)](https://chrome.google.com/webstore/detail/idecjbacpbnbijnbekemooobjpffogab)
+![Users](https://img.shields.io/chrome-web-store/users/idecjbacpbnbijnbekemooobjpffogab?label=Users)
+![Rating](https://img.shields.io/chrome-web-store/rating/idecjbacpbnbijnbekemooobjpffogab?label=Rating)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Chrome extension that enhances YouTube playlist pages with powerful filtering capabilities. Perfect for managing large playlists and Watch Later content.
 
 ## ✨ Features
@@ -25,7 +30,7 @@ After installation:
 
 ## Installation
 
-The extension will be available on the Chrome Web Store soon.
+You can install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/idecjbacpbnbijnbekemooobjpffogab).
 
 ## Local Development
 
@@ -58,7 +63,7 @@ npm run build
 4. Load the extension in Chrome
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" in the top right
-   - Click "Load unpacked" and select the project root directory
+   - Click "Load unpacked" and select the project `/package` directory
 
 5. Start development with hot-reload
 ```bash
