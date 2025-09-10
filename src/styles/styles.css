@@ -24,7 +24,7 @@
   border-radius: 0;
   position: sticky;
   top: 0;
-  z-index: 2001;
+  z-index: 100;
 }
 
 .yt-wl-filters-head {
@@ -270,3 +270,4 @@ input:focus {
 #alerts {
   display: none !important;
 }
+
