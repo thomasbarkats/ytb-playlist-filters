@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTube Playlist Filters",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Thomas BARKATS",
   "description": "Enhance your YouTube Watch Later and other playlists experience with search and filtering capabilities.",
   "homepage_url": "https://github.com/thomasbarkats/ytb-playlist-filters",
