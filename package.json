@@ -1,6 +1,6 @@
 {
   "name": "ytb-playlist-filters",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Enhance your YouTube Watch Later and other playlists experience with search and filtering capabilities.",
   "private": true,
   "main": "src/main.js",
