@@ -1,11 +1,11 @@
 :root {
   /* Theme colors */
   --theme-background: var(--yt-spec-base-background);
-  --theme-surface: var(--yt-spec-10-percent-layer);
+  --theme-surface: var(--yt-spec-additive-background);
   --theme-primary: var(--yt-spec-call-to-action);
   --theme-primary-hover: var(--yt-spec-call-to-action-inverse);
-  --theme-badge: var(--yt-spec-badge-chip-background);
-  --theme-raised: var(--yt-spec-raised-background);
+  --theme-badge: var(--yt-spec-button-chip-background-hover);
+  --theme-hover: var(--yt-spec-additive-background);
 
   /* Text colors */
   --text-primary: var(--yt-spec-text-primary);
@@ -129,7 +129,7 @@
 }
 
 .yt-toggle-button:hover {
-  background-color: var(--theme-raised);
+  background-color: var(--yt-spec-button-chip-background-hover);
 }
 
 .yt-toggle-states {
@@ -210,7 +210,7 @@ select,
 input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--theme-surface);
+  border: 1px solid var(--yt-spec-outline);
   border-radius: 10px;
   background: var(--theme-background);
   color: var(--text-primary);
@@ -223,21 +223,20 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23FFFFFF" d="M6 9l6 6 6-6"/></svg>');
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23888888" d="M6 9l6 6 6-6"/></svg>');
   background-repeat: no-repeat;
   background-position: right 8px center;
-  cursor: pointer;
-}
-
-@media (prefers-color-scheme: light) {
-  select {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23000000" d="M6 9l6 6 6-6"/></svg>');
-  }
 }
 
 select:hover,
 input:hover {
-  background-color: var(--theme-raised);
+  background-color: var(--theme-hover);
+}
+
+select option {
+  background-color: var(--theme-background);
+  color: var(--text-primary);
 }
 
 select:focus,
@@ -248,10 +247,10 @@ input:focus {
 
 .reset-filter {
   position: absolute;
-  right: -32px;
+  right: -40px;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 8px;
   cursor: pointer;
   color: var(--text-secondary);
   border-radius: 50%;
