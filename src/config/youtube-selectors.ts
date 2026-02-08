@@ -33,11 +33,11 @@ export const YT_CSS_VARS = {
   BACKGROUND: '--yt-spec-base-background',
   TEXT_PRIMARY: '--yt-spec-text-primary',
   TEXT_SECONDARY: '--yt-spec-text-secondary',
-  LAYER_10_PERCENT: '--yt-spec-10-percent-layer',
+  RAISED_BACKGROUND: '--yt-spec-raised-background',
   CALL_TO_ACTION: '--yt-spec-call-to-action',
   CALL_TO_ACTION_INVERSE: '--yt-spec-call-to-action-inverse',
-  RAISED_BACKGROUND: '--yt-spec-raised-background',
-  BADGE_CHIP_BACKGROUND: '--yt-spec-badge-chip-background'
+  MENU_BACKGROUND: '--yt-spec-menu-background',
+  OUTLINE: '--yt-spec-outline'
 };
 
 
