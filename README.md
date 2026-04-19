@@ -11,6 +11,7 @@ A Chrome (Chromium browsers) extension that enhances YouTube playlist pages with
 - **Channel Filtering**: Easily filter videos by channel name
 - **Smart Search**: Search through video titles with instant results
 - **Duration Filter**: Find videos based on their length (short/medium/long)
+- **Watch Status Filter**: Filter videos by watched, unwatched, or in-progress status
 - **Privacy-Focused**: Works entirely client-side with no data collection
 - **Playlist Management**: Create custom playlists from filtered videos
 - **Native Look & Feel**: Seamlessly integrates with YouTube's interface
