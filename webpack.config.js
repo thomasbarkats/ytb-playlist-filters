@@ -3,9 +3,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/PlaylistPageEnhancer.ts',
+  entry: {
+    main: './src/PlaylistPageEnhancer.ts',
+    background: './src/background.ts',
+  },
   output: {
-    filename: 'main.bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'package'),
     clean: true,
   },

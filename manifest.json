@@ -9,6 +9,9 @@
   "host_permissions": [
     "https://www.youtube.com/*"
   ],
+  "background": {
+    "service_worker": "background.bundle.js"
+  },
   "content_scripts": [{
     "matches": ["*://*.youtube.com/*"],
     "js": ["main.bundle.js"],
