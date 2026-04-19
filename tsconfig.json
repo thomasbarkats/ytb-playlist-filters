@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./package",
-    "rootDir": "./src",
-    "moduleResolution": "node",
-    "baseUrl": "."
+    "rootDir": "./src"
   },
   "include": [
     "src/**/*"
