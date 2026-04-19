@@ -3,6 +3,7 @@ export interface CurrentFilters {
   channelSearch: string;
   titleSearch: string;
   duration: string;
+  watchStatus: string;
 }
 
 export interface VideoStats {

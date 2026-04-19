@@ -16,8 +16,12 @@ export const YOUTUBE_SELECTORS = {
     CHANNEL_SEARCH: '#channelSearch',
     TITLE_SEARCH: '#titleSearch',
     DURATION: '#durationFilter',
-    CATEGORY: '#categoryFilter'
+    CATEGORY: '#categoryFilter',
+    WATCH_STATUS: '#watchStatusFilter'
   },
+
+  // Progress bar indicating how much of the video has been watched
+  VIDEO_PROGRESS: 'ytd-thumbnail-overlay-resume-playback-renderer #progress',
 
   // Buttons
   RESET_ALL_BTN: '#resetAllFilters',
