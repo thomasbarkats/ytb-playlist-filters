@@ -38,69 +38,98 @@
   <!-- Filters section -->
   <div class="yt-wl-filters-rows">
 
-    <!-- Channel selector -->
-    <div class="filter-row">
-      <span>Filter by Channel</span>
-      <div class="input-wrapper">
-        <select id="channelFilter">
-          <option value="">All Channels</option>
-        </select>
-        <button class="reset-filter" data-for="channelFilter" style="display: none;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+    <!-- Column 1: Select filters -->
+    <div class="filters-col">
+
+      <!-- Channel selector -->
+      <div class="filter-row">
+        <span>Filter by Channel</span>
+        <div class="input-wrapper">
+          <select id="channelFilter">
+            <option value="">All Channels</option>
+          </select>
+          <button class="reset-filter" data-for="channelFilter" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
+
+      <!-- Duration selector -->
+      <div class="filter-row">
+        <span>Filter by Duration</span>
+        <div class="input-wrapper">
+          <select id="durationFilter">
+            <option value="">Any Duration</option>
+            <option value="0-10">Less than 10min</option>
+            <option value="10-20">10-20min</option>
+            <option value="20-30">20-30min</option>
+            <option value="30-45">30-45min</option>
+            <option value="45+">More than 45min</option>
+          </select>
+          <button class="reset-filter" data-for="durationFilter" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Watch status selector -->
+      <div class="filter-row">
+        <span>Filter by Status</span>
+        <div class="input-wrapper">
+          <select id="watchStatusFilter">
+            <option value="">All Videos</option>
+            <option value="watched">Watched</option>
+            <option value="started">Started</option>
+            <option value="unwatched">Unwatched</option>
+          </select>
+          <button class="reset-filter" data-for="watchStatusFilter" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Channel search -->
-    <div class="filter-row">
-      <span>Search Channel</span>
-      <div class="input-wrapper">
-        <input type="text" id="channelSearch" placeholder="Search channel" />
-        <button class="reset-filter" data-for="channelSearch" style="display: none;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
+    <!-- Column 2: Search filters -->
+    <div class="filters-col">
 
-    <!-- Title search -->
-    <div class="filter-row">
-      <span>Search Title</span>
-      <div class="input-wrapper">
-        <input type="text" id="titleSearch" placeholder="Search by title" />
-        <button class="reset-filter" data-for="titleSearch" style="display: none;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+      <!-- Channel search -->
+      <div class="filter-row">
+        <span>Search Channel</span>
+        <div class="input-wrapper">
+          <input type="text" id="channelSearch" placeholder="Search channel" />
+          <button class="reset-filter" data-for="channelSearch" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <!-- Duration selector -->
-    <div class="filter-row">
-      <span>Filter by Duration</span>
-      <div class="input-wrapper">
-        <select id="durationFilter">
-          <option value="">Any Duration</option>
-          <option value="0-10">Less than 10min</option>
-          <option value="10-20">10-20min</option>
-          <option value="20-30">20-30min</option>
-          <option value="30-45">30-45min</option>
-          <option value="45+">More than 45min</option>
-        </select>
-        <button class="reset-filter" data-for="durationFilter" style="display: none;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+      <!-- Title search -->
+      <div class="filter-row">
+        <span>Search Title</span>
+        <div class="input-wrapper">
+          <input type="text" id="titleSearch" placeholder="Search by title" />
+          <button class="reset-filter" data-for="titleSearch" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
+
     </div>
 
   </div>

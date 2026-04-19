@@ -17,6 +17,7 @@ class PlaylistPageEnhancer {
       channelSearch: '',
       titleSearch: '',
       duration: '',
+      watchStatus: '',
     };
 
     // Create debounced search function with our custom debounce
@@ -142,14 +143,42 @@ class PlaylistPageEnhancer {
     return false;
   }
 
-  // Parse video duration from YouTube's time format (MM:SS or HH:MM:SS)
-  private getVideoDuration(video: Element): number | null {
+  // Parse video duration in total seconds (MM:SS or HH:MM:SS)
+  private getVideoDurationInSeconds(video: Element): number | null {
     const timeText = video.querySelector(SELECTORS.VIDEO_DURATION)?.textContent?.trim();
     if (!timeText) return null;
-
     const parts = timeText.split(':').map(Number);
-    // Convert to minutes: handle both MM:SS and HH:MM:SS formats
-    return parts.length === 2 ? parts[0] : parts.length === 3 ? parts[0] * 60 + parts[1] : null;
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    return null;
+  }
+
+  // Returns duration in minutes (for duration range filtering and stats)
+  private getVideoDuration(video: Element): number | null {
+    const seconds = this.getVideoDurationInSeconds(video);
+    return seconds !== null ? seconds / 60 : null;
+  }
+
+  // Determine watch status from progress bar and video duration
+  // - watched: progress >= 95%
+  // - started: at least 30 seconds watched (but < 95%)
+  // - unwatched: no progress or < 30 seconds (covers autoplay hover previews)
+  private getWatchStatus(video: Element): 'watched' | 'started' | 'unwatched' {
+    const progressEl = video.querySelector(SELECTORS.VIDEO_PROGRESS) as HTMLElement | null;
+    if (!progressEl) return 'unwatched';
+
+    const progressPercent = parseFloat(progressEl.style.width);
+    if (isNaN(progressPercent) || progressPercent <= 0) return 'unwatched';
+    if (progressPercent >= 95) return 'watched';
+
+    const totalSeconds = this.getVideoDurationInSeconds(video);
+    if (totalSeconds !== null) {
+      const watchedSeconds = (progressPercent / 100) * totalSeconds;
+      return watchedSeconds >= 30 ? 'started' : 'unwatched';
+    }
+
+    // Duration unavailable — trust that any progress > 0 means started
+    return 'started';
   }
 
   // Check if video duration falls within selected range
@@ -169,7 +198,8 @@ class PlaylistPageEnhancer {
     const filterInputs = {
       select: [
         { selector: SELECTORS.FILTER_INPUTS.CHANNEL, event: 'change' },
-        { selector: SELECTORS.FILTER_INPUTS.DURATION, event: 'change' }
+        { selector: SELECTORS.FILTER_INPUTS.DURATION, event: 'change' },
+        { selector: SELECTORS.FILTER_INPUTS.WATCH_STATUS, event: 'change' }
       ],
       search: [
         { selector: SELECTORS.FILTER_INPUTS.CHANNEL_SEARCH, event: 'input' },
@@ -228,6 +258,7 @@ class PlaylistPageEnhancer {
       [SELECTORS.FILTER_INPUTS.CHANNEL_SEARCH]: 'channelSearch',
       [SELECTORS.FILTER_INPUTS.TITLE_SEARCH]: 'titleSearch',
       [SELECTORS.FILTER_INPUTS.DURATION]: 'duration',
+      [SELECTORS.FILTER_INPUTS.WATCH_STATUS]: 'watchStatus',
     };
     return selectorToKey[selector];
   }
@@ -453,6 +484,7 @@ class PlaylistPageEnhancer {
         if (this.currentFilters.channelSearch && !searchInText(channel, this.currentFilters.channelSearch)) return false;
         if (this.currentFilters.titleSearch && !searchInText(title, this.currentFilters.titleSearch)) return false;
         if (this.currentFilters.duration && !this.isInDurationRange(duration, this.currentFilters.duration)) return false;
+        if (this.currentFilters.watchStatus && this.getWatchStatus(video) !== this.currentFilters.watchStatus) return false;
 
         return true;
       });

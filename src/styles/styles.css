@@ -25,6 +25,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  container-type: inline-size;
 }
 
 .yt-wl-filters-head {
@@ -37,15 +38,40 @@
 
 .yt-wl-filters-rows {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 14px 74px;
+}
+
+.filters-col {
+  flex: 1;
+  min-width: 356px;
+  max-width: 426px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  row-gap: 14px;
+  align-content: start;
+  position: relative;
+}
+
+.filters-col:nth-child(2)::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--text-secondary);
+  opacity: 0.15;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8px, #000 calc(100% - 8px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 8px, #000 calc(100% - 8px), transparent 100%);
 }
 
 
 /* Header actions and info */
 
 .yt-wl-filters-btn {
-  padding: 9px 16px;
+  padding: 10px 16px;
   border: none;
   border-radius: 18px;
   font-size: 14px;
@@ -119,7 +145,7 @@
 
 .yt-toggle-button {
   display: block;
-  padding: 10px 0;
+  padding: 11px 0;
   border-radius: 18px;
   background: var(--theme-surface);
   cursor: pointer;
@@ -148,10 +174,10 @@
 .yt-toggle-button::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 3px;
+  left: 3px;
   width: 75px;
-  height: calc(100% - 4px);
+  height: calc(100% - 6px);
   background: var(--theme-badge);
   border-radius: 18px;
   transition: transform 0.2s;
@@ -166,7 +192,7 @@
 }
 
 .yt-toggle-input:checked~.yt-toggle-button::after {
-  transform: translateX(74px);
+  transform: translateX(72px);
   width: 87px;
 }
 
@@ -186,21 +212,24 @@ ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer {
 /* Filter rows with inputs and actions */
 
 .filter-row {
-  display: flex;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   align-items: center;
-  gap: 16px;
+  column-gap: 22px;
 }
 
 .filter-row span {
-  width: 140px;
   color: var(--text-primary);
   font-size: 16px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .input-wrapper {
   flex: 1;
-  max-width: 300px;
+  min-width: 200px;
+  max-width: 270px;
   position: relative;
   display: flex;
   align-items: center;
@@ -209,6 +238,7 @@ ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer {
 select,
 input {
   width: 100%;
+  min-width: 0;
   padding: 10px 12px;
   border: 1px solid var(--yt-spec-outline);
   border-radius: 10px;
@@ -262,6 +292,25 @@ input:focus {
 .reset-filter:hover {
   background: var(--theme-surface);
   color: var(--text-primary);
+}
+
+
+/* Single-column mode */
+@container (max-width: 785px) {
+  .yt-wl-filters-rows {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 14px;
+    column-gap: 22px;
+  }
+
+  .filters-col {
+    display: contents;
+  }
+
+  .filters-col:nth-child(2)::before {
+    display: none;
+  }
 }
 
 
