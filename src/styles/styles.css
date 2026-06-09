@@ -1,15 +1,27 @@
 :root {
-  /* Theme colors */
-  --theme-background: var(--yt-spec-base-background);
-  --theme-surface: var(--yt-spec-additive-background);
-  --theme-primary: var(--yt-spec-call-to-action);
-  --theme-primary-hover: var(--yt-spec-call-to-action-inverse);
-  --theme-badge: var(--yt-spec-button-chip-background-hover);
-  --theme-hover: var(--yt-spec-additive-background);
+  /* Light mode */
+  --theme-background: #ffffff;
+  --theme-surface: rgba(0, 0, 0, 0.06);
+  --theme-surface-hover: rgba(0, 0, 0, 0.10);
+  --theme-primary: #065fd4;
+  --theme-primary-hover: #0356bf;
+  --theme-badge: rgba(0, 0, 0, 0.10);
+  --theme-border: rgba(0, 0, 0, 0.18);
+  --text-primary: #0f0f0f;
+  --text-secondary: #606060;
+}
 
-  /* Text colors */
-  --text-primary: var(--yt-spec-text-primary);
-  --text-secondary: var(--yt-spec-text-secondary);
+html[dark] {
+  /* Dark mode */
+  --theme-background: #0f0f0f;
+  --theme-surface: rgba(255, 255, 255, 0.10);
+  --theme-surface-hover: rgba(255, 255, 255, 0.16);
+  --theme-primary: #3ea6ff;
+  --theme-primary-hover: #65b8ff;
+  --theme-badge: rgba(255, 255, 255, 0.15);
+  --theme-border: rgba(255, 255, 255, 0.20);
+  --text-primary: #f1f1f1;
+  --text-secondary: #aaaaaa;
 }
 
 
@@ -155,7 +167,7 @@
 }
 
 .yt-toggle-button:hover {
-  background-color: var(--yt-spec-button-chip-background-hover);
+  background-color: var(--theme-surface-hover);
 }
 
 .yt-toggle-states {
@@ -240,7 +252,7 @@ input {
   width: 100%;
   min-width: 0;
   padding: 10px 12px;
-  border: 1px solid var(--yt-spec-outline);
+  border: 1px solid var(--theme-border);
   border-radius: 10px;
   background: var(--theme-background);
   color: var(--text-primary);
@@ -254,14 +266,18 @@ select {
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23888888" d="M6 9l6 6 6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23606060" d="M6 9l6 6 6-6"/></svg>');
   background-repeat: no-repeat;
   background-position: right 8px center;
 }
 
+html[dark] select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="%23aaaaaa" d="M6 9l6 6 6-6"/></svg>');
+}
+
 select:hover,
 input:hover {
-  background-color: var(--theme-hover);
+  background-color: var(--theme-surface-hover);
 }
 
 select option {

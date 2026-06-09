@@ -32,19 +32,6 @@ export const YOUTUBE_SELECTORS = {
   STATS_INFO_ICON: '.stats-info-icon'
 };
 
-export const YT_CSS_VARS = {
-  // YouTube theme variables
-  BACKGROUND: '--yt-spec-base-background',
-  TEXT_PRIMARY: '--yt-spec-text-primary',
-  TEXT_SECONDARY: '--yt-spec-text-secondary',
-  RAISED_BACKGROUND: '--yt-spec-raised-background',
-  CALL_TO_ACTION: '--yt-spec-call-to-action',
-  CALL_TO_ACTION_INVERSE: '--yt-spec-call-to-action-inverse',
-  MENU_BACKGROUND: '--yt-spec-menu-background',
-  OUTLINE: '--yt-spec-outline'
-};
-
-
 export const DURATION_RANGES = {
   SHORT: '0-10',
   MEDIUM: '10-20',
