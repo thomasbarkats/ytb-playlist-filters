@@ -9,6 +9,16 @@ export const YOUTUBE_SELECTORS = {
   VIDEO_DURATION: '#text.ytd-thumbnail-overlay-time-status-renderer',
   THUMBNAIL: 'ytd-thumbnail',
 
+  // Modern layout used by single-channel playlists (lockup view-model)
+  MODERN: {
+    LIST_CONTENTS: '#contents',
+    VIDEO_ITEM: 'yt-lockup-view-model',
+    VIDEO_LINK: 'a[href*="watch?v="]',
+    CHANNEL_LINK: 'a[href*="/@"], a[href*="/channel/"], a[href*="/user/"]',
+    VIDEO_DURATION: '.ytBadgeShapeText',
+    VIDEO_PROGRESS: '.ytThumbnailOverlayProgressBarHostWatchedProgressBarSegment',
+  },
+
   // Custom UI selectors
   FILTER_CONTAINER: 'yt-wl-filters-container',
   FILTER_INPUTS: {

@@ -40,8 +40,14 @@ html[dark] {
   container-type: inline-size;
 }
 
+/* Modern layout already indents via the section renderer */
+yt-item-section-renderer > .yt-wl-filters-container {
+  padding-left: 0;
+}
+
 .yt-wl-filters-head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 24px;
@@ -83,10 +89,16 @@ html[dark] {
 /* Header actions and info */
 
 .yt-wl-filters-btn {
-  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
   border: none;
-  border-radius: 18px;
+  border-radius: 20px;
+  font-family: inherit; /* buttons don't inherit the page font (Roboto) */
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   background: var(--theme-surface);
   color: var(--text-primary);
@@ -126,7 +138,9 @@ html[dark] {
 .yt-wl-filters-stats {
   color: var(--text-secondary);
   font-size: 14px;
-  min-width: 150px;
+  /* Stay one piece and wrap to a new line instead of shrinking */
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .stats-info-icon {
@@ -143,6 +157,35 @@ html[dark] {
   color: var(--text-primary);
 }
 
+.stats-tooltip {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: 260px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(28, 28, 30, 0.96);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: normal;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.stats-info-icon:hover .stats-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
 
 /* Toggle switch view mode */
 
@@ -151,36 +194,48 @@ html[dark] {
   margin-left: auto;
 }
 
+/* Dim only the contents at rest (keep the background matching the buttons) */
+.yt-toggle-states,
+.yt-toggle-button::after {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.yt-toggle-wrapper:hover .yt-toggle-states,
+.yt-toggle-wrapper:hover .yt-toggle-button::after {
+  opacity: 1;
+}
+
 .yt-toggle-input {
   display: none;
 }
 
 .yt-toggle-button {
-  display: block;
-  padding: 11px 0;
-  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: 20px;
   background: var(--theme-surface);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.2s;
-}
-
-.yt-toggle-button:hover {
-  background-color: var(--theme-surface-hover);
 }
 
 .yt-toggle-states {
   font-size: 14px;
-  display: flex;
+  font-weight: 500;
+  /* Equal segments so the thumb can use percentages */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .yt-toggle-state {
   color: var(--text-secondary);
   transition: color 0.2s;
   text-align: center;
+  white-space: nowrap;
   line-height: 15px;
-  padding-top: 1px;
+  padding: 1px 24px 0;
 }
 
 .yt-toggle-button::after {
@@ -188,10 +243,11 @@ html[dark] {
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 75px;
+  /* One segment, 3px inset all around */
+  width: calc(50% - 6px);
   height: calc(100% - 6px);
   background: var(--theme-badge);
-  border-radius: 18px;
+  border-radius: 20px;
   transition: transform 0.2s;
   z-index: 1;
 }
@@ -204,8 +260,8 @@ html[dark] {
 }
 
 .yt-toggle-input:checked~.yt-toggle-button::after {
-  transform: translateX(72px);
-  width: 87px;
+  /* +6px offsets the thumb inset to reach the 2nd segment */
+  transform: translateX(calc(100% + 6px));
 }
 
 
@@ -218,6 +274,14 @@ ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer ytd-th
 
 ytd-playlist-video-list-renderer.compact-view ytd-playlist-video-renderer {
   height: auto !important;
+}
+
+/* Compact style for the modern (lockup) layout */
+
+#contents.compact-view .ytLockupViewModelContentImage,
+#contents.compact-view yt-lockup-view-model .ytThumbnailViewModelHost {
+  width: 96px !important;
+  min-width: 96px !important;
 }
 
 
@@ -326,6 +390,12 @@ input:focus {
 
   .filters-col:nth-child(2)::before {
     display: none;
+  }
+
+  /* Tight header: stats drops below the buttons */
+  .yt-wl-filters-stats {
+    order: 1;
+    flex-basis: 100%;
   }
 }
 
