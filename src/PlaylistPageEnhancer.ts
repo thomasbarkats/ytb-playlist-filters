@@ -63,7 +63,9 @@ class PlaylistPageEnhancer {
     return `${SELECTORS.PLAYLIST_CONTAINER} ${SELECTORS.VIDEO_ITEM}`;
   }
   private modernItemSelector(): string {
-    return `#primary ${SELECTORS.MODERN.VIDEO_ITEM}`;
+    // Require the playlist section so we don't match the home feed's lockups
+    // (which would inject the bar into the wrong container during navigation)
+    return `#primary ${SELECTORS.MODERN.LIST_SECTION} ${SELECTORS.MODERN.VIDEO_ITEM}`;
   }
 
   // Pick the layout that actually has videos; classic wins on ambiguity
@@ -118,8 +120,6 @@ class PlaylistPageEnhancer {
     this.currentUrl = window.location.href;
 
     getElement(`.${SELECTORS.FILTER_CONTAINER}`)?.remove();
-    this.channelFilters.clear();
-    this.processedVideos = new WeakSet<Element>();
     Object.keys(this.currentFilters).forEach(key => {
       this.currentFilters[key as keyof CurrentFilters] = '';
     });
@@ -129,14 +129,25 @@ class PlaylistPageEnhancer {
   private async ensureUI(): Promise<void> {
     if (this.building) return;
     if (!window.location.href.includes('/playlist?')) return;
-    // Common case during scroll/loading: bar already there, skip the layout queries
-    if (getElement(`.${SELECTORS.FILTER_CONTAINER}`)) return;
 
     this.detectLayout();
-    if (!this.getListContainer()) return;
+    const container = this.getListContainer();
+    if (!container) return;
+
+    // Done if the bar is already attached to the current container. Checking the
+    // placement (not just presence) lets us rebuild when a transitional render
+    // leaves the bar orphaned or in the wrong container.
+    const bar = getElement(`.${SELECTORS.FILTER_CONTAINER}`);
+    const expectedParent = this.modern ? container.parentElement : container;
+    if (bar && bar.parentElement === expectedParent) return;
 
     this.building = true;
     try {
+      bar?.remove();
+      // Fresh build for this container: drop any channels picked up from the
+      // previous playlist's videos during a transition
+      this.channelFilters.clear();
+      this.processedVideos = new WeakSet<Element>();
       const created = await this.createFilterUI();
       if (created) {
         this.setupInputListeners();

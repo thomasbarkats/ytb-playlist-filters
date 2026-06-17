@@ -11,6 +11,9 @@ export const YOUTUBE_SELECTORS = {
 
   // Modern layout used by single-channel playlists (lockup view-model)
   MODERN: {
+    // Section wrapping the playlist list; distinguishes it from the home feed,
+    // which also uses lockups but inside ytd-rich-grid-renderer
+    LIST_SECTION: 'yt-item-section-renderer',
     LIST_CONTENTS: '#contents',
     VIDEO_ITEM: 'yt-lockup-view-model',
     VIDEO_LINK: 'a[href*="watch?v="]',
