@@ -130,28 +130,30 @@ class PlaylistPageEnhancer {
     if (this.building) return;
     if (!window.location.href.includes('/playlist?')) return;
 
+    // Runs on every mutation; keep it cheap. A connected bar means we're done.
+    // An orphaned bar (isConnected false) still falls through to rebuild.
+    const existingBar = getElement(`.${SELECTORS.FILTER_CONTAINER}`);
+    if (existingBar?.isConnected) return;
+
     this.detectLayout();
     const container = this.getListContainer();
     if (!container) return;
 
-    // Done if the bar is already attached to the current container. Checking the
-    // placement (not just presence) lets us rebuild when a transitional render
-    // leaves the bar orphaned or in the wrong container.
-    const bar = getElement(`.${SELECTORS.FILTER_CONTAINER}`);
-    const expectedParent = this.modern ? container.parentElement : container;
-    if (bar && bar.parentElement === expectedParent) return;
+    // Wait for the list to render: injecting mid-reconciliation can blank the page
+    if (this.getVideoElements().length === 0) return;
 
     this.building = true;
     try {
-      bar?.remove();
+      existingBar?.remove();
       // Fresh build for this container: drop any channels picked up from the
       // previous playlist's videos during a transition
       this.channelFilters.clear();
       this.processedVideos = new WeakSet<Element>();
-      const created = await this.createFilterUI();
-      if (created) {
-        this.setupInputListeners();
-        this.initCompactView();
+      const bar = await this.createFilterUI();
+      if (bar) {
+        // Scope lookups to the bar; a document query can miss it in the lockup layout
+        this.setupInputListeners(bar);
+        this.initCompactView(bar);
       }
       this.startVideoProcessing();
     } finally {
@@ -184,15 +186,20 @@ class PlaylistPageEnhancer {
     }
   }
 
-  // Inject the filter bar above the list; returns false if already present
-  private async createFilterUI(): Promise<boolean> {
+  // Inject the filter bar above the list; returns the bar, or null if not created
+  private async createFilterUI(): Promise<HTMLElement | null> {
     try {
       const container = this.getListContainer();
-      if (!container) return false;
-      if (getElement(`.${SELECTORS.FILTER_CONTAINER}`)) return false;
+      if (!container) return null;
+      if (getElement(`.${SELECTORS.FILTER_CONTAINER}`)) return null;
 
       const response = await fetch(chrome.runtime.getURL('templates/filterContainer.html'));
       const html = await response.text();
+
+      // Re-resolve after the await: YouTube may have swapped the container out
+      const target = this.getListContainer();
+      if (!target?.isConnected) return null;
+      if (getElement(`.${SELECTORS.FILTER_CONTAINER}`)) return null;
 
       const filterContainer = document.createElement('div');
       filterContainer.className = SELECTORS.FILTER_CONTAINER;
@@ -200,14 +207,16 @@ class PlaylistPageEnhancer {
 
       if (this.modern) {
         // Lockup grid is a leaf; place the bar just above it
-        container.parentElement?.insertBefore(filterContainer, container);
+        const parent = target.parentElement;
+        if (!parent?.isConnected) return null;
+        parent.insertBefore(filterContainer, target);
       } else {
-        container.insertBefore(filterContainer, container.firstChild);
+        target.insertBefore(filterContainer, target.firstChild);
       }
-      return true;
+      return filterContainer;
     } catch (error) {
       this.logError('Failed to create UI:', error);
-      return false;
+      return null;
     }
   }
 
@@ -233,17 +242,17 @@ class PlaylistPageEnhancer {
         }
       }
       if (hasNewVideos) {
-        // Wait for duration elements to be available
-        const checkDurations = async () => {
+        // Wait for durations to render, capped: private videos never get one
+        const checkDurations = async (attempts = 0) => {
           const newVideos = this.getVideoElements();
           const allDurationsLoaded = newVideos.every(
             video => this.hasDurationLoaded(video)
           );
-          if (allDurationsLoaded) {
+          if (allDurationsLoaded || attempts >= 20) {
             this.processVideos(newVideos);
             this.applyFilters();
           } else {
-            setTimeout(checkDurations, 100);
+            setTimeout(() => checkDurations(attempts + 1), 100);
           }
         };
         checkDurations();
@@ -363,7 +372,7 @@ class PlaylistPageEnhancer {
   }
 
   // Bind listeners directly to the filter inputs (recreated on each UI rebuild)
-  private setupInputListeners(): void {
+  private setupInputListeners(root: ParentNode): void {
     // Filter inputs configuration
     const filterInputs = {
       select: [
@@ -379,7 +388,7 @@ class PlaylistPageEnhancer {
 
     // Setup select inputs
     filterInputs.select.forEach(({ selector }) => {
-      const element = getElement(selector) as HTMLSelectElement;
+      const element = root.querySelector(selector) as HTMLSelectElement;
       if (element) {
         element.addEventListener('change', () => {
           this.currentFilters[this.getFilterKey(selector)] = element.value;
@@ -391,7 +400,7 @@ class PlaylistPageEnhancer {
 
     // Setup search inputs
     filterInputs.search.forEach(({ selector }) => {
-      const element = getElement(selector) as HTMLInputElement;
+      const element = root.querySelector(selector) as HTMLInputElement;
       if (element) {
         element.addEventListener('input', (e: Event) => {
           const value = (e.target as HTMLInputElement).value;
@@ -461,12 +470,9 @@ class PlaylistPageEnhancer {
     };
   }
 
-  private initCompactView(): void {
-    const toggleInput = document.querySelector('#toggleCompactView') as HTMLInputElement;
-    if (!toggleInput) {
-      console.error('Toggle input not found');
-      return;
-    }
+  private initCompactView(root: ParentNode): void {
+    const toggleInput = root.querySelector('#toggleCompactView') as HTMLInputElement;
+    if (!toggleInput) return;
 
     // Apply saved state
     const isCompact = localStorage.getItem('yt-wl-compact-view') === 'true';
