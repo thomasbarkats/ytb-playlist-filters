@@ -34,7 +34,11 @@ export const YOUTUBE_SELECTORS = {
   },
 
   // Progress bar indicating how much of the video has been watched
-  VIDEO_PROGRESS: 'ytd-thumbnail-overlay-resume-playback-renderer #progress',
+  // (ytw- is the current renderer, ytd- kept for older rollouts)
+  VIDEO_PROGRESS: [
+    'ytw-thumbnail-overlay-resume-playback-renderer [class*="ResumePlaybackProgress"]',
+    'ytd-thumbnail-overlay-resume-playback-renderer #progress'
+  ].join(', '),
 
   // Buttons
   RESET_ALL_BTN: '#resetAllFilters',
