@@ -30,8 +30,8 @@ importers:
         specifier: ^14.0.0
         version: 14.0.0(webpack@5.112.2)
       format-commit:
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^2.0.0
+        version: 2.0.0
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -808,6 +808,10 @@ packages:
     resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
     engines: {node: '>=20'}
 
+  commander@15.1.0:
+    resolution: {integrity: sha512-cgnQ88TRrWcC7pVq46RzJVRMktu3W2RcbnoidnfBsl1bmDCBwJS/udcIZpKoCrbAYYaCqsz1yZCVIgbIaU3ddQ==}
+    engines: {node: '>=22.12.0'}
+
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
@@ -911,9 +915,9 @@ packages:
     resolution: {integrity: sha512-kWyh8ADvHBFz6ua5xYOPnUroZTT/bwWfrCeL0Wj1dzG4/YOmOcfJ99W8dOVyyynJN35rZ9aCOtHChqQovV7yog==}
     engines: {node: '>=6'}
 
-  format-commit@1.1.0:
-    resolution: {integrity: sha512-wbXM37n/0yUJM/252vS1Dwzs1+2B4sX6ep1iUh6JjVxEaLP9q5yfaRMX09WgE1g1IatYAyf85q0Uhh5RtCSmCA==}
-    engines: {node: '>=16.0.0'}
+  format-commit@2.0.0:
+    resolution: {integrity: sha512-jiBTfDEhunMnyAmGIzQXw+d2CTg34Fq+VaqO08Tq+sFg5LEJlGNGFRnEiRxnsUtqULIli2yb+P539hj/2SUR0g==}
+    engines: {node: '>=22.12.0'}
     hasBin: true
 
   gensync@1.0.0-beta.2:
@@ -2258,6 +2262,8 @@ snapshots:
 
   commander@14.0.3: {}
 
+  commander@15.1.0: {}
+
   commander@2.20.3: {}
 
   compress-commons@7.0.1:
@@ -2340,9 +2346,9 @@ snapshots:
 
   flru@1.0.2: {}
 
-  format-commit@1.1.0:
+  format-commit@2.0.0:
     dependencies:
-      commander: 14.0.3
+      commander: 15.1.0
       kleur: 4.1.5
       prompts: 2.4.2
 

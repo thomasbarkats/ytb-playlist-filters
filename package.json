@@ -36,7 +36,7 @@
     "babel-loader": "^10.1.1",
     "bestzip": "^3.0.1",
     "copy-webpack-plugin": "^14.0.0",
-    "format-commit": "^1.1.0",
+    "format-commit": "^2.0.0",
     "typescript": "^6.0.3",
     "webpack": "^5.107.2",
     "webpack-cli": "^7.0.3"
