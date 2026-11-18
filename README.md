@@ -39,7 +39,7 @@ This project uses TypeScript, Webpack, and the Chrome Extension API.
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- pnpm 11
+- pnpm 11 (Corepack recommended)
 - Chromium based browser supporting extensions
 
 ### Setup

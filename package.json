@@ -3,7 +3,7 @@
   "version": "1.1.42",
   "description": "Enhance your YouTube Watch Later and other playlists experience with search and filtering capabilities.",
   "private": true,
-  "packageManager": "pnpm@11.5.2",
+  "packageManager": "pnpm@12.21.0",
   "main": "src/main.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
@@ -29,17 +29,17 @@
     "url": "https://github.com/thomasbarkats/ytb-playlist-filters/issues"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.1",
-    "@babel/preset-env": "^8.0.1",
-    "@babel/preset-typescript": "^8.0.1",
-    "@types/chrome": "^0.1.43",
+    "@babel/core": "^8.1.2",
+    "@babel/preset-env": "^8.0.7",
+    "@babel/preset-typescript": "^8.0.7",
+    "@types/chrome": "^0.3.7",
     "babel-loader": "^10.1.1",
-    "bestzip": "^3.0.1",
+    "bestzip": "^4.0.3",
     "copy-webpack-plugin": "^14.0.0",
     "format-commit": "^2.0.0",
-    "typescript": "^6.0.3",
-    "webpack": "^5.107.2",
-    "webpack-cli": "^7.0.3"
+    "typescript": "^7.0.2",
+    "webpack": "^5.112.2",
+    "webpack-cli": "^7.3.1"
   },
   "overrides": {
     "@babel/preset-modules": {

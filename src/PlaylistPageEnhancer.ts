@@ -1,5 +1,5 @@
 import { YOUTUBE_SELECTORS as SELECTORS, DURATION_THRESHOLDS } from './config/youtube-selectors';
-import { CurrentFilters, VideoStats, DurationThresholds } from './types/PlaylistPageEnhancer.types';
+import type { CurrentFilters, VideoStats, DurationThresholds } from './types/PlaylistPageEnhancer.types';
 import { debounce, searchInText } from './utils/search.utils';
 import { getElement, getAllElements } from './utils/dom-helpers';
 

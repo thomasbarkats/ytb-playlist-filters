@@ -3,6 +3,7 @@
     "target": "es2022",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "types": ["chrome"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
