@@ -39,7 +39,7 @@ This project uses TypeScript, Webpack, and the Chrome Extension API.
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- npm or yarn
+- pnpm 11
 - Chromium based browser supporting extensions
 
 ### Setup
@@ -52,12 +52,12 @@ cd ytb-playlist-filters
 
 2. Install dependencies
 ```bash
-npm install
+pnpm install
 ```
 
 3. Build the project
 ```bash
-npm run build
+pnpm run build
 ```
 
 4. Load the extension in Chrome
@@ -67,7 +67,7 @@ npm run build
 
 5. Start development with hot-reload
 ```bash
-npm run watch
+pnpm run watch
 ```
 
 ## Contributing
